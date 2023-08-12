@@ -6,12 +6,11 @@
     <svg-icon icon-class="phone" class="phone" />
     <svg-icon icon-class="profile" class="profile" />
   </div>
+  <router-view></router-view>
 </template>
 
-<script>
-export default {
-  name: 'Layout'
-}
+<script setup lang="ts">
+
 </script>
 
 <style scoped>

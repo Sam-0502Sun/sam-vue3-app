@@ -1,5 +1,7 @@
 import { createStore } from 'vuex'
 
+// 引入仓库模块
+import user from './modules/user'
 export default createStore({
   state: {
   },
@@ -8,5 +10,6 @@ export default createStore({
   actions: {
   },
   modules: {
+    user
   }
 })
