@@ -24,7 +24,8 @@
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive } from 'vue'
-import { userAccountLogin } from '@/api/user'
+import { userAccountLogin } from '@/api/user/user'
+
 // 账号密码数据
 const loginForm = reactive({
   username: 'Sam',
