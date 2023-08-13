@@ -25,6 +25,7 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive } from 'vue'
 import { userAccountLogin } from '@/api/user/user'
+import store from '@/store'
 
 // 账号密码数据
 const loginForm = reactive({
@@ -34,7 +35,8 @@ const loginForm = reactive({
 // 点击按钮登录
 const login = () => {
   userAccountLogin(loginForm).then((res) => {
-    console.log(res)
+    store.commit('user/setUser', res.data)
+    console.log(store.state.user.profile.token)
   })
 }
 
