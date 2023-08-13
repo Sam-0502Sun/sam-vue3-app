@@ -23,10 +23,11 @@
 
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 import { userAccountLogin } from '@/api/user/user'
 import store from '@/store'
 import { getTime } from '@/utils/time/time'
+import { ElNotification } from 'element-plus'
 
 // 账号密码数据
 const loginForm = reactive({
@@ -37,11 +38,19 @@ const loginForm = reactive({
 const login = () => {
   userAccountLogin(loginForm).then((res) => {
     store.commit('user/setUser', res.data)
-    console.log(store.state.user.profile.token)
+    ElNotification({
+      type: 'success',
+      title: `Hi,${getTime()}好！`,
+      message: ('欢迎回来！')
+    })
+  }).catch(err => {
+    ElNotification({
+      type: 'error',
+      title: `Hi,${getTime()}好！`,
+      message: (err as Error).message
+    })
   })
 }
-
-console.log(getTime())
 
 </script>
 
