@@ -2,16 +2,16 @@ export interface loginForm {
   username: string,
   password: string
 }
-export interface dataType {
+export interface profileType {
   token?: string,
   message?: string
 }
 export interface loginResponseData {
   code: number,
-  data: dataType
+  data: profileType
 }
 
-export interface storeResponseData {
-  profile?: dataType,
+export interface userStoreData {
+  profile?: profileType,
   redirectUrl?: string
 }

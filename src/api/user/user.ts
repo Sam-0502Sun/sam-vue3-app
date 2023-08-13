@@ -1,7 +1,7 @@
 // 用户相关的接口
 
 import request from '@/utils/request'
-import { loginForm } from '@/api/user/type'
+import { loginForm } from '@/api/user/user-type'
 
 /**
  * 帐号密码登录

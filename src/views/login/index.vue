@@ -23,9 +23,10 @@
 
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { userAccountLogin } from '@/api/user/user'
 import store from '@/store'
+import { getTime } from '@/utils/time/time'
 
 // 账号密码数据
 const loginForm = reactive({
@@ -39,6 +40,8 @@ const login = () => {
     console.log(store.state.user.profile.token)
   })
 }
+
+console.log(getTime())
 
 </script>
 

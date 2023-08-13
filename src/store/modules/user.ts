@@ -1,11 +1,8 @@
 // user 仓库模块
-import { storeResponseData, dataType } from '@/api/user/type'
+import { userStoreData, profileType } from '@/api/user/user-type'
 
-interface userDataItem{
-  token?: string
-}
 export interface StateProps{
-  profile: userDataItem
+  profile: profileType
   redirectUrl: string
 }
 
@@ -19,11 +16,11 @@ const state = {
 }
 const mutations = {
   // 修改用户信息，payload就是用户信息对象
-  setUser (state: storeResponseData, payload: dataType) {
+  setUser (state: userStoreData, payload: profileType) {
     state.profile = payload
   },
   // 修改回跳地址
-  setRedirectUrl (state: storeResponseData, url: string) {
+  setRedirectUrl (state: userStoreData, url: string) {
     state.redirectUrl = url
   }
 }
