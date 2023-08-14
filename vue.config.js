@@ -4,12 +4,15 @@ function resolve (resolvePath) {
   return path.join(__dirname, resolvePath)
 }
 module.exports = {
-  configureWebpack: {
-    resolve: {
-      symlinks: false,
-      alias: {
-        '@': path.resolve('src')
-      }
+  pluginOptions: {
+    'style-resources-loader': {
+      preProcessor: 'less',
+      // 哪些文件自动引入，使用绝对路径
+      // 需要是path.join来拼接完整路径
+      patterns: [
+        path.resolve(__dirname, './src/assets/styles/variables.less'),
+        path.resolve(__dirname, './src/assets/styles/mixins.less')
+      ]
     }
   },
   chainWebpack (config) {
@@ -34,5 +37,13 @@ module.exports = {
           }
         ]
       }) // 传入配置
+  },
+  configureWebpack: {
+    resolve: {
+      symlinks: false,
+      alias: {
+        '@': path.resolve('src')
+      }
+    }
   }
 }
