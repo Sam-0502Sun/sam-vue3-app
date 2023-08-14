@@ -28,8 +28,8 @@ export default {
 <style lang="less" scoped>
 img {
   display: block;
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
   background-size: cover;
 }
 </style>

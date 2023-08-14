@@ -4,6 +4,7 @@
       <el-aside>
         <div class="Logo-container">
           <Web3dImg :Logo="Logo" />
+          <div class="txt">后台管理系统</div>
         </div>
       </el-aside>
       <el-container>
@@ -30,8 +31,16 @@ import Web3dImg from '@/components/CommonComponents/web-3d-img/web-3d-img.vue'
       height: 100vh;
       background: @menuBackground;
       .Logo-container {
-        height: 80px;
+        height: 60px;
         width: 100%;
+        display: flex;
+        .txt {
+          height: 60px;
+          line-height: 60px;
+          font-size: 28px;
+          color: white;
+          margin-left: 20px;
+        }
       }
     }
     .el-header {
