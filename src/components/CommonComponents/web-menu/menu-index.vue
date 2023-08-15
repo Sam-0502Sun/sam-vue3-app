@@ -3,7 +3,6 @@
     <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
-      @select="handleSelect"
       router
     >
       <template v-for="item in constantRoute" :key="item.name">
