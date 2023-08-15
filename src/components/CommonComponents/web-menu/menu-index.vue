@@ -11,20 +11,20 @@
           <template v-for="i in item.children" :key="i.name">
             <template v-if="!i.children">
               <el-menu-item v-if="!i.meta.hidden" :index="i.path">
+                <el-icon>
+                  <component :is="i.meta.icon"></component>
+                </el-icon>
                 <template #title>
-                  <el-icon>
-                    <component :is="i.meta.icon"></component>
-                  </el-icon>
                   <span>{{ i.meta.title }}</span>
                 </template>
               </el-menu-item>
             </template>
             <template v-if="i.children&&i.children.length === 1">
               <el-menu-item v-if="!i.children[0].meta.hidden" :index="i.children[0].path">
+                <el-icon>
+                  <component :is="i.children[0].meta.icon"></component> // 加载对应的图标
+                </el-icon>
                 <template #title>
-                  <el-icon>
-                    <component :is="i.children[0].meta.icon"></component> // 加载对应的图标
-                  </el-icon>
                   <span>{{ i.children[0].meta.title }}</span>
                 </template>
               </el-menu-item>
@@ -51,10 +51,10 @@
         </template>
         <template v-else>
           <el-menu-item v-if="!item.meta.hidden" :index="item.path">
+            <el-icon>
+              <component :is="item.meta.icon"></component>
+            </el-icon>
             <template #title>
-              <el-icon>
-                <component :is="item.meta.icon"></component>
-              </el-icon>
               <span>{{ item.meta.title }}</span>
             </template>
           </el-menu-item>
@@ -66,6 +66,7 @@
 
 <script lang="ts">
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 export default {
   name: 'Menu',
   props: {
@@ -73,8 +74,11 @@ export default {
       type: Array
     }
   },
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   setup () {
     const activeIndex = ref('/')
+    const route = useRoute()
+    activeIndex.value = route.path
 
     return {
       activeIndex

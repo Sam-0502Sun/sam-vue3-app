@@ -7,11 +7,15 @@
           <div class="txt">后台管理系统</div>
         </div>
         <el-scrollbar class="scrollbar">
+          <!-- 菜单组件 -->
           <Menu :constantRoute="constantRoute" />
         </el-scrollbar>
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <!-- 顶部导航组件 -->
+          <TableBar />
+        </el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -24,6 +28,7 @@
 import Logo from '@/assets/images/Logo/Logo.png'
 import Web3dImg from '@/components/CommonComponents/web-3d-img/web-3d-img.vue'
 import Menu from '@/components/CommonComponents/web-menu/menu-index.vue'
+import TableBar from '@/components/CommonComponents/web-tablebar/tablebar-index.vue'
 import { constantRoute } from '@/router/routes'
 
 </script>
@@ -53,7 +58,7 @@ import { constantRoute } from '@/router/routes'
       }
     }
     .el-header {
-      background: #27BA9B;
+      background-image: linear-gradient(to right, #d7d1d1, #ac9999, #f4dada);
     }
   }
 }
