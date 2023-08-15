@@ -7,7 +7,7 @@
           <div class="txt">后台管理系统</div>
         </div>
         <el-scrollbar class="scrollbar">
-          <Menu />
+          <Menu :constantRoute="constantRoute" />
         </el-scrollbar>
       </el-aside>
       <el-container>
@@ -24,6 +24,7 @@
 import Logo from '@/assets/images/Logo/Logo.png'
 import Web3dImg from '@/components/CommonComponents/web-3d-img/web-3d-img.vue'
 import Menu from '@/components/CommonComponents/web-menu/menu-index.vue'
+import { constantRoute } from '@/router/routes'
 
 </script>
 

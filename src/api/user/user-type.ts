@@ -1,13 +1,11 @@
-// import type { RouteRecordRaw } from 'vue-router'
 
 export interface loginForm {
   username: string,
   password: string
 }
 export interface profileType {
-  token?: string,
-  message?: string,
-  // menuRoutes:RouteRecordRaw[]
+  token: string|null,
+  message: string|null,
 }
 export interface loginResponseData {
   code: number,

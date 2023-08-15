@@ -4,26 +4,117 @@
       :default-active="activeIndex"
       class="el-menu-demo"
       @select="handleSelect"
+      router
     >
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="2">数据大屏</el-menu-item>
-      <el-sub-menu index="3">
-        <template #title>权限管理</template>
-        <el-menu-item index="3-1">用户管理</el-menu-item>
-        <el-menu-item index="3-2">角色管理</el-menu-item>
-        <el-menu-item index="3-3">菜单管理</el-menu-item>
-      </el-sub-menu>
+      <template v-for="item in constantRoute" :key="item.name">
+        <template v-if="item.children">
+          <template v-for="i in item.children" :key="i.name">
+            <template v-if="!i.children">
+              <el-menu-item v-if="!i.meta.hidden" :index="i.path">
+                <template #title>
+                  <el-icon>
+                    <component :is="i.meta.icon"></component>
+                  </el-icon>
+                  <span>{{ i.meta.title }}</span>
+                </template>
+              </el-menu-item>
+            </template>
+            <template v-if="i.children&&i.children.length === 1">
+              <el-menu-item v-if="!i.children[0].meta.hidden" :index="i.children[0].path">
+                <template #title>
+                  <el-icon>
+                    <component :is="i.children[0].meta.icon"></component> // 加载对应的图标
+                  </el-icon>
+                  <span>{{ i.children[0].meta.title }}</span>
+                </template>
+              </el-menu-item>
+            </template>
+            <template v-if="i.children&&i.children.length > 1">
+              <el-sub-menu v-if="!i.meta.hidden" :index="i.path">
+                <template #title>
+                  <el-icon>
+                    <component :is="i.meta.icon"></component>
+                  </el-icon>
+                  <span>{{ i.meta.title }}</span>
+                </template>
+                <template v-for="ii in i.children" :key="ii.name">
+                  <el-menu-item v-if="!ii.meta.hidden" :index="ii.path">
+                    <el-icon>
+                      <component :is="ii.meta.icon"></component>
+                    </el-icon>
+                    <span>{{ ii.meta.title }}</span>
+                  </el-menu-item>
+                </template>
+              </el-sub-menu>
+            </template>
+          </template>
+        </template>
+        <template v-else>
+          <el-menu-item v-if="!item.meta.hidden" :index="item.path">
+            <template #title>
+              <el-icon>
+                <component :is="item.meta.icon"></component>
+              </el-icon>
+              <span>{{ item.meta.title }}</span>
+            </template>
+          </el-menu-item>
+        </template>
+      </template>
     </el-menu>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { useStore } from 'vuex'
+<script lang="ts">
+import { ref } from 'vue'
+export default {
+  name: 'Menu',
+  props: {
+    constantRoute: {
+      type: Array
+    }
+  },
+  setup () {
+    const activeIndex = ref('/')
 
-const store = useStore()
-console.log(store.state.user.profile)
+    return {
+      activeIndex
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
-
+.menu-container {
+  width: 100%;
+  :deep(.el-menu) {
+    width: 100%;
+    .el-menu-item {
+      background: @menuBackground;
+      color: white;
+      border-right: none;
+      width: @asideWidth;
+    }
+    .el-menu-item.is-active {
+      color: #FFB302;
+      background: #02243f;
+    }
+    .el-menu-item:hover {
+      background: #02243f;
+    }
+    .el-sub-menu {
+      background: @menuBackground;
+      color: white;
+      width: @asideWidth;
+      .el-sub-menu__title {
+        color: white;
+      }
+      .el-sub-menu__title:hover {
+        background: unset;
+      }
+    }
+    .el-sub-menu:hover {
+      background: #02243f;
+    }
+  }
+}
 </style>
