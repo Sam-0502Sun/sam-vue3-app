@@ -6,6 +6,9 @@
           <Web3dImg :Logo="Logo" />
           <div class="txt">后台管理系统</div>
         </div>
+        <el-scrollbar class="scrollbar">
+          <Menu />
+        </el-scrollbar>
       </el-aside>
       <el-container>
         <el-header>Header</el-header>
@@ -20,6 +23,7 @@
 <script setup lang="ts">
 import Logo from '@/assets/images/Logo/Logo.png'
 import Web3dImg from '@/components/CommonComponents/web-3d-img/web-3d-img.vue'
+import Menu from '@/components/CommonComponents/web-menu/menu-index.vue'
 
 </script>
 
@@ -31,16 +35,20 @@ import Web3dImg from '@/components/CommonComponents/web-3d-img/web-3d-img.vue'
       height: 100vh;
       background: @menuBackground;
       .Logo-container {
-        height: 60px;
+        height: @LogoHeight;
         width: 100%;
         display: flex;
         .txt {
-          height: 60px;
-          line-height: 60px;
-          font-size: 28px;
+          height: @LogoHeight;
+          line-height: @LogoHeight;
+          font-size: 20px;
           color: white;
           margin-left: 20px;
         }
+      }
+      .scrollbar {
+        width: 100%;
+        height: calc(100vh - @LogoHeight);
       }
     }
     .el-header {

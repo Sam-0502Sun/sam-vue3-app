@@ -35,6 +35,7 @@ import { getTime } from '@/utils/time/time'
 import { ElNotification, ElMessage } from 'element-plus'
 import type { FormRules } from 'element-plus'
 import { useRouter } from 'vue-router'
+import routes from '@/router/index'
 
 const router = useRouter()
 interface RuleForm {
@@ -87,6 +88,7 @@ const login = () => {
         title: `Hi,${getTime()}好！`,
         message: ('欢迎回来！')
       })
+      console.log(routes)
       router.push('/')
     }).catch(err => {
       ElNotification({

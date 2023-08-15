@@ -6,10 +6,11 @@ export interface StateProps{
   redirectUrl: string
 }
 
-const state = {
+const state: StateProps = {
   // 用户信息
   profile: {
-    token: ''
+    token: '',
+    message: ''
   },
   // 登录后回跳路径
   redirectUrl: '/'

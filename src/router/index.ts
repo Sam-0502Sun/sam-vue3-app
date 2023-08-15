@@ -4,7 +4,7 @@ import Home from '@/views/home/index.vue'
 import Login from '@/views/login/index.vue'
 import NoData from '@/views/404/index.vue'
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'Login',
@@ -18,12 +18,14 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: { name: '首页' }
       },
       {
         path: '/404',
         name: 'NoData',
-        component: NoData
+        component: NoData,
+        meta: { name: '首页' }
       },
       {
         path: '/:pathMatch(.*)*',
