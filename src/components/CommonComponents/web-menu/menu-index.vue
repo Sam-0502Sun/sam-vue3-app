@@ -4,6 +4,7 @@
       :default-active="activeIndex"
       class="el-menu-demo"
       router
+      :collapse="isCollapse"
     >
       <template v-for="item in constantRoute" :key="item.name">
         <template v-if="item.children">
@@ -64,13 +65,16 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 export default {
   name: 'Menu',
   props: {
     constantRoute: {
       type: Array
+    },
+    isCollapse: {
+      type: Boolean
     }
   },
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -78,6 +82,10 @@ export default {
     const activeIndex = ref('/')
     const route = useRoute()
     activeIndex.value = route.path
+
+    watch(route, () => {
+      activeIndex.value = route.path
+    })
 
     return {
       activeIndex
@@ -88,14 +96,14 @@ export default {
 
 <style lang="less" scoped>
 .menu-container {
-  width: 100%;
+  .el-menu-demo:not(.el-menu--collapse) {
+    width: 300px;
+  }
   :deep(.el-menu) {
-    width: 100%;
+    border-right: 1px solid @menuBackground;
     .el-menu-item {
       background: @menuBackground;
       color: white;
-      border-right: none;
-      width: @asideWidth;
     }
     .el-menu-item.is-active {
       color: #FFB302;
@@ -107,7 +115,6 @@ export default {
     .el-sub-menu {
       background: @menuBackground;
       color: white;
-      width: @asideWidth;
       .el-sub-menu__title {
         color: white;
       }

@@ -6,6 +6,8 @@ export interface loginForm {
 export interface profileType {
   token: string|null,
   message: string|null,
+  username: string,
+  avatar: string
 }
 export interface loginResponseData {
   code: number,

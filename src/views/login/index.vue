@@ -82,13 +82,13 @@ const login = () => {
   // 表单验证通过在发起请求
   ruleFormRef.value.validate().then(() => {
     userAccountLogin(loginForm).then((res) => {
-      store.commit('user/setUser', res.data)
+      const { token, message, username, avatar } = res.data
+      store.commit('user/setUser', { token, message, username, avatar })
       ElNotification({
         type: 'success',
         title: `Hi,${getTime()}好！`,
         message: ('欢迎回来！')
       })
-      console.log(routes)
       router.push('/')
     }).catch(err => {
       ElNotification({

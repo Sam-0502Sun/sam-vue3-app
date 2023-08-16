@@ -1,7 +1,7 @@
 <template>
   <div class="tabbar-right">
     <el-button icon="Refresh" circle/>
-    <el-button icon="FullScreen" circle/>
+    <el-button icon="FullScreen" @click="fullScreen" circle/>
     <el-button icon="Setting" circle/>
     <img src="../../../../assets/logo.png" alt=""/>
     <!-- 下拉菜单 -->
@@ -21,9 +21,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Settings'
+<script lang="ts" setup>
+// 全屏按钮点击回调
+const fullScreen = () => {
+  // Dom对象的一个属性:可以用拍判断当前是否全屏【全屏：true   非全屏： false】
+  const full = document.fullscreenElement
+  if (!full) {
+    // 全屏模式开启
+    document.documentElement.requestFullscreen()
+  } else {
+  //  退出全屏模式
+    document.exitFullscreen()
+  }
 }
 </script>
 

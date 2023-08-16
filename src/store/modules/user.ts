@@ -10,7 +10,9 @@ const state: StateProps = {
   // 用户信息
   profile: {
     token: '',
-    message: ''
+    message: '',
+    username: '',
+    avatar: ''
   },
   // 登录后回跳路径
   redirectUrl: '/'

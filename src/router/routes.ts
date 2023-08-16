@@ -29,6 +29,7 @@ export const constantRoute = [
     name: 'Layout',
     component: Layout,
     meta: { title: 'Layout', hidden: true },
+    redirect: '/',
     children: [
       {
         path: '/',
@@ -53,6 +54,7 @@ export const constantRoute = [
         name: 'Management',
         component: Manage,
         meta: { title: '管理页面', hidden: false, icon: 'Monitor' },
+        redirect: '/manage/userManagement',
         children: [
           {
             path: '/manage/userManagement',
@@ -79,6 +81,7 @@ export const constantRoute = [
         name: 'Product',
         component: Product,
         meta: { title: '商品管理', hidden: false, icon: 'Goods' },
+        redirect: '/product/trademark',
         children: [
           {
             path: '/product/trademark',
