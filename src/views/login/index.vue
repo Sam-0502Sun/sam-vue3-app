@@ -29,14 +29,14 @@
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
-import { userAccountLogin } from '@/api/user/user'
+import { getUserInfo, userAccountLogin } from '@/api/user/user'
 import store from '@/store'
 import { getTime } from '@/utils/time/time'
 import { ElNotification, ElMessage } from 'element-plus'
 import type { FormRules } from 'element-plus'
-import { useRouter } from 'vue-router'
-import routes from '@/router/index'
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
 const router = useRouter()
 interface RuleForm {
   username: string,
@@ -45,8 +45,8 @@ interface RuleForm {
 const ruleFormRef = ref()
 // 账号密码数据
 const loginForm = reactive<RuleForm>({
-  username: 'Sam',
-  password: '111111'
+  username: 'admin',
+  password: 'atguigu123'
 })
 
 // 自定义校验函数
@@ -82,20 +82,27 @@ const login = () => {
   // 表单验证通过在发起请求
   ruleFormRef.value.validate().then(() => {
     userAccountLogin(loginForm).then((res) => {
-      const { token, message, username, avatar } = res.data
-      store.commit('user/setUser', { token, message, username, avatar })
+      console.log(res + '111')
+      const Token:string = res.data
+      store.commit('user/setToken', Token)
+      sessionStorage.setItem('is-login', '1')
       ElNotification({
         type: 'success',
         title: `Hi,${getTime()}好！`,
         message: ('欢迎回来！')
       })
-      router.push('/')
-    }).catch(err => {
-      ElNotification({
-        type: 'error',
-        title: `Hi,${getTime()}好！`,
-        message: (err as Error).message
+      getUserInfo().then((res) => {
+        console.log(res + '333')
       })
+      // 判断路径中是否有 query 参数
+      const redirect:any = route.query.redirect
+      router.push({ path: redirect || '/' })
+    }).catch(e => {
+      console.log(e + '222')
+      // ElNotification({
+      //   type: 'error',
+      //   title: `${e}`
+      // })
     })
   }).catch(() => {
     ElMessage.error({

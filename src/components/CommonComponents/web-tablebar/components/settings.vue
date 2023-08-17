@@ -14,7 +14,7 @@
     </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+          <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -22,6 +22,15 @@
 </template>
 
 <script lang="ts" setup>
+import { useStore } from 'vuex'
+import { useRoute, useRouter } from 'vue-router'
+import { userAccountLogout } from '@/api/user/user'
+import { ElNotification } from 'element-plus'
+import { getTime } from '@/utils/time/time'
+
+const store = useStore()
+const router = useRouter()
+const route = useRoute()
 // 全屏按钮点击回调
 const fullScreen = () => {
   // Dom对象的一个属性:可以用拍判断当前是否全屏【全屏：true   非全屏： false】
@@ -33,6 +42,22 @@ const fullScreen = () => {
   //  退出全屏模式
     document.exitFullscreen()
   }
+}
+// 退出登录功能
+const logout = () => {
+  // 清除仓库信息
+  store.commit('user/setToken', '')
+  // 清除localStorage保存的信息
+  userAccountLogout().then(() => {
+    ElNotification({
+      type: 'success',
+      title: '退出成功！'
+    })
+  })
+  localStorage.removeItem('sam-vue3-app')
+  sessionStorage.removeItem('is-login')
+  // 跳转到 login 页面,或者传当前路由参数，登录后重定向到当前页
+  router.push({ path: '/login', query: { redirect: route.path } })
 }
 </script>
 

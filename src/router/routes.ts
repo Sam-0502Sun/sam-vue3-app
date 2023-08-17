@@ -29,10 +29,10 @@ export const constantRoute = [
     name: 'Layout',
     component: Layout,
     meta: { title: 'Layout', hidden: true },
-    redirect: '/',
+    redirect: '/home',
     children: [
       {
-        path: '/',
+        path: '/home',
         name: 'Home',
         component: Home,
         meta: { title: '首页', hidden: false, icon: 'HomeFilled' } // hidden-->菜单权限，是否隐藏菜单, icon-->菜单图标

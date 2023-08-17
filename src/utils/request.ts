@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '@/store'
 
 // 导出基准地址，原因：其他地方不是通过axios发请求的地方用上基准地址
-export const baseURL = 'https://dev.usemock.com/64bff1019da07a327501b2d1'
+export const baseURL = 'http://sph-api.atguigu.cn'
 const instance = axios.create({
   // axios 的一些配置，baseURL  timeout
   baseURL,
@@ -14,11 +14,11 @@ instance.interceptors.request.use(config => {
   // 进行请求配置的修改
   // 如果本地又token就在头部携带
   // 1. 获取用户信息对象
-  const { profile } = store.state.user
+  const Token = store.state.user.token
   // 2. 判断是否有token
-  if (profile.token) {
+  if (Token) {
     // 3. 设置token
-    config.headers.Authorization = `Bearer ${profile.token}`
+    config.headers.Authorization = `Bearer ${Token}`
   }
   return config
 }, err => {
